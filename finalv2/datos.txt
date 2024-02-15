@@ -1,0 +1,8 @@
+Carrera: Portales electrónicos
+Cuatrimestre: 4to
+Año: 2022
+Turno: Noche
+Comisión: dwn4av
+Docente: Santiago Gallino
+Caracter: 2 Parcial
+Alumnos: Antonucci Lucas, Yamamoto Ana Paula
