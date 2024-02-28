@@ -28,18 +28,18 @@
             <div class="alert alert-danger">Hay errores en los valores del formulario. Por favor, revise los campos y corrija el error.</div>
         @endif -->
     </div>
-    <div class="container w-100">
+    @if($errors->any())
+            <div class="alert alert-danger">Hay errores en los valores del formulario. Por favor, revise los campos y corrija el error.</div>
+        @endif
+    <div class="container w-100 mb-5">
         <form class="row justify-content-center mx-auto" action="{{route('orders.edit',['id'=> $order->id])}}" method="post"  enctype="multipart/form-data">
-            <!-- <div class="col-12">
-                <a class="btn btn-dark my-3 text-white" href="<?= url('admin/orders');?>">Volver</a>
-            </div> -->
-          
+
             @csrf
             <div class="col-7 border p-5 mt-3">
                 <div class="row d-flex">
-                <div class="col-12 my-1">
-                    <p class="text-center small text-danger">A las ordenes de compra se le puede modificar unicamente la descripcion del estado.</p>
-                </div>
+                    <div class="col-12 my-1">
+                        <p class="text-center small text-danger">A las ordenes de compra se le puede modificar unicamente la descripcion del estado.</p>
+                    </div>
                     <div class="col-12 d-none">
                         <label for="id"  class="form-label">ID</label>
                         <input  type="text" name="id" id="id" class="form-label w-100"
@@ -91,13 +91,18 @@
                         @enderror
                     </div>
                 </div>
-            </div>
-            <div class="col-7 my-4 d-flex">
-                <a href="{{url('admin/orders')}}" class="btn btn-secondary w-100 mx-3">Cancelar</a>
-                <button class="btn btn-success w-100  mx-3" type="submit">Aceptar</button>
+                <div class="col-12">
+                    <div class="row my-4 d-flex justify-content-center">
+                        <div class="col-5">
+                            <a href="{{url('admin/orders')}}" class="btn btn-secondary w-100 mx-3">Cancelar</a>
+                        </div>
+                        <div class="col-5">
+                            <button class="btn btn-success w-100  mx-3" type="submit">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
-
 </div>
 @endsection

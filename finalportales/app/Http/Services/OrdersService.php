@@ -157,14 +157,12 @@ class OrdersService
     }
 
     public function editOrder(Request $request, int $id){
-
-        $order = Order::findOrFail($id);
-
-        $request->validate(Order::$rules, Order::$rulesMessage);
-
-        $data = $request->all();
-
         try{
+            $order = Order::findOrFail($id);
+
+            $request->validate(Order::$rules, Order::$rulesMessage);
+
+            $data = $request->all();
             DB::transaction(function () use ($order, $data) {
                 $order->update(['status' => $data['status']]);
             });

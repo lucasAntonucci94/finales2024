@@ -15,12 +15,13 @@ class Order extends Model
 
     public static $rules = [
         'id_user'=>'required|exists:users,id',
+        'status'=>'required',
         // 'id_product'=>'required|exists:products',
     ];
 
     public static $rulesMessage = [
-        // 'status.required'=>'El status de la orden es obligatorio.',
-        // 'status.min'=>'El status de la orden debe tener al menos :min caracteres.',
+        'status.required'=>'El estado de la orden es obligatorio.',
+        // 'status.min'=>'El estado de la orden debe tener al menos :min caracteres.',
         'id_user.required'=>'El usuario es obligatorio.',
         'id_user.exists'=>'El usuario no existe en al base de datos.',
         // 'id_product.required'=>'El producto es obligatorio.',
