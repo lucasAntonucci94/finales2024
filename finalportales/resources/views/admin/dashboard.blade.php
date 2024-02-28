@@ -69,7 +69,7 @@
                     <i class="fa fa-area-chart"  style="font-size: 75px;"></i>
                     <br>
                     <p class="pt-4 text-uppercase font-weight-bold h4">
-                        Estadística
+                        Estadísticas
                     </p>
                 </a>
             </div>

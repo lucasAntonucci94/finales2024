@@ -1,30 +1,33 @@
 @extends('layouts.admin')
 
-@section('title','Estadística')
+@section('title','Estadísticas')
 
 @section('main')
 <script src="https://www.gstatic.com/charts/loader.js"></script>
-<div class="row py-4 bg-light deleteRowMargin">
+    <div class="row py-4 bg-light deleteRowMargin">
         <div class="col-12 text-center">
-            <h1>Estadística</h1>
+            <h1>Estadísticas</h1>
         </div>
     </div>
-<div class="row m-3">
-    <div class="col-md-12 d-flex justify-content-center">
-        <p class="text-center small text-info"> Seleccione alguna de las siguientes estadística para ver el grafico asociado.</p>
+    <div class="row m-3 justify-content-center">
+            <div class="col-8">
+                <a class="btn btn-dark my-3 text-white" href="<?= url('admin/dashboard');?>">Volver al panel</a>
+            </div>
+        <div class="col-md-12 d-flex justify-content-center">
+            <p class="text-center small text-info"> Seleccione alguna de las siguientes estadísticas para ver el grafico asociado.</p>
+        </div>
+        <div class="col-md-8 mx-auto">
+            <form action="{{ route('admin.statistics.get') }}" method="post" class="d-flex align-items-center" id="statisticsForm">
+                @csrf
+                <select class="form-control mx-2" id="chartTypes" name="chartTypeId">
+                @foreach($chartTypes ?? [] as $chartTypeId => $chartTypeName)
+                    <option value="{{ $chartTypeId }}">{{ $chartTypeName }}</option>
+                @endforeach
+                </select>
+                <!-- <button type="submit" class="btn btn-primary">Buscar</button> -->
+            </form>
+        </div>
     </div>
-    <div class="col-md-8 mx-auto">
-        <form action="{{ route('admin.statistics.get') }}" method="post" class="d-flex align-items-center" id="statisticsForm">
-            @csrf
-            <select class="form-control mx-2" id="chartTypes" name="chartTypeId">
-            @foreach($chartTypes ?? [] as $chartTypeId => $chartTypeName)
-                <option value="{{ $chartTypeId }}">{{ $chartTypeName }}</option>
-            @endforeach
-            </select>
-            <!-- <button type="submit" class="btn btn-primary">Buscar</button> -->
-        </form>
-    </div>
-</div>
 @if($data != null)
     <div class="row justify-content-center  deleteRowMargin">
         <div class="col-md-8">
@@ -88,7 +91,7 @@
 @else
     <div class="row justify-content-center  deleteRowMargin">
         <div class="col-md-8">
-            <p class="text-center">NO HAY DATOS PARA MOSTRAR ESTADíSTICAS</p>
+            <p class="text-center">NO HAY DATOS PARA MOSTRAR ESTADíSTICA</p>
         </div>
     </div>
 @endif
