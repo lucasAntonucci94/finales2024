@@ -51,7 +51,7 @@
                                     <div id="error-name" class="text-danger text-small"><p>{{ $message }}</p></div>
                                 @enderror
                             </div>
-                            <div class="col-12">
+                            <!-- <div class="col-12">
                                 <label for="surname"  class="form-label w-100 my-3 font-weight-bold">Apellido</label>
                                 <input type="text" name="surname" placeholder="ingrese su apellido" id="surname" class="form-control w-100 @error('surname') is-invalid @enderror"
                                 @error('surname') aria-describedby="error-surname" @enderror
@@ -60,7 +60,7 @@
                                 @error('surname')
                                     <div id="error-surname" class="text-danger text-small"><p>{{ $message }}</p></div>
                                 @enderror
-                            </div>
+                            </div> -->
                             <div class="col-12 d-none">
                                 <label for="id_role"  class="form-label w-100 my-3">id_role</label>
                                 <input type="text" name="id_role" id="id_role" class="form-control w-100 "

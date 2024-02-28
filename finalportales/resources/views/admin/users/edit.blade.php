@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-6 ">
             <div class="row d-flex">
                 <div class="col-6">
                     @if ($user->image != '' && file_exists('images/'.$user->image))
