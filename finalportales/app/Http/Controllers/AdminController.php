@@ -102,7 +102,7 @@ class AdminController extends Controller
             }
         }
         return view('admin.orders.show',[
-            'orderId'=> optional($order)->id,
+            'order'=> $order,
             'items'=> $items,
             'total'=> $total,
         ]);

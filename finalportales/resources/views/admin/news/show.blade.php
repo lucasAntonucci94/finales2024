@@ -4,6 +4,8 @@
 
 @section('main')
 <div class="container container-padding">
+    <h1 class="w-100 text-center my-5 textBreak h4">{{$new->detail}} </h1>
+
     @if(Session::has('message.success'))
     <div class="alert alert-success alert-dismissible fade show text-center">
 
@@ -22,7 +24,6 @@
         </button>
     </div>
 @endif
-<h2 class="w-100 text-center my-5 textBreak">Vista de la noticia: {{$new->detail}} </h2>
 <div class="text-center">
 
     @if ($new->image != '' && file_exists('images/'.$new->image))
@@ -33,7 +34,7 @@
             src=" {{ url('images/'.$new->image) }} "
             alt=" {{ $new->detail }} "
             {!! $attrs !!}
-            class=".img-fluid"
+            class=".img-fluid w-100"
             >
     @endif
 

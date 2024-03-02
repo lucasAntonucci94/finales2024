@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row d-flex justify-content-center align-items-start p-5">
-            <div class="col-6"> 
+        <div class="col-6"> 
             <div class="text-center">
             @if ($product->image != '' && file_exists('images/'.$product->image))
                 @php

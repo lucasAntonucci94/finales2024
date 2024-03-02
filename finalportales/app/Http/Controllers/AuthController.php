@@ -50,9 +50,15 @@ class AuthController extends Controller
     }
 
     public function register(Request $request){
-        $request->validate(User::$rules, User::$rulesMessage);
-        $data = $request->all();
         try{
+            $request->validate(User::$rules, User::$rulesMessage);
+            $data = $request->all();
+            $dbUser = User::where('email', $data["email"])->first();
+            if($dbUser != null){
+                return $this->toRoute('auth.register.form',[
+                    'error' => 'El email ingresado ya pertenece a otro usuario.'
+                ])->withInput();
+            }
             DB::transaction(function () use ($data) {
                 $user = User::create([
                     'name' => $data['name'],

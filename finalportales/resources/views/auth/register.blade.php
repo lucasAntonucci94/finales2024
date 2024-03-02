@@ -24,7 +24,7 @@
         </div>
     @endif
         <div class="row thisRow">
-            <div class="col-8 text-white  p-5 rounded border border-light bg-dark2">
+            <div class="col-5 text-white  p-5 rounded border border-light bg-dark2 mb-5">
                 <h1 class="text-center">Registrarse</h1>
                 <p class="text-center py-1">Ingrese los datos de su usuario.</p>
                 <form class="row mx-auto" action="{{route('auth.register')}}" method="post" enctype="multipart/form-data">

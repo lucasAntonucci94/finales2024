@@ -25,12 +25,18 @@ class UsersService
     }
 
     public function createUser(Request $request){
-        $request->validate(User::$rules, User::$rulesMessage);
-        $data = $request->all();
-
-        $data['image'] = $this->uploadImage($request);
-        $data['password'] = Hash::make($data['password']);
         try{
+            $request->validate(User::$rules, User::$rulesMessage);
+            $data = $request->all();
+            $data['image'] = $this->uploadImage($request);
+            $data['password'] = Hash::make($data['password']);
+            
+            $dbUser = User::where('email', $data["email"])->first();
+            if($dbUser != null){
+                return $this->toRoute('auth.register.form',[
+                    'error' => 'El email ingresado ya pertenece a otro usuario.'
+                ])->withInput();
+            }
            DB::transaction(function () use ($data) {
                 $user = User::create($data);
             });
@@ -49,7 +55,6 @@ class UsersService
     public function formEdit(int $id){
         $user = User::findOrFail($id);
         $roles = Role::all();
-
         return view('admin/users/edit', [
             'user'=> $user,
             'roles'=> $roles,
@@ -67,25 +72,25 @@ class UsersService
 
     public function editUser(Request $request, int $id){
 
-        $user = User::findOrFail($id);
-
-        $request->validate(User::$rules, User::$rulesMessage);
-
-        $data = $request->all();
-
-        $data['image'] = $this->uploadImage($request) ?? $user->image;
-
-        if($data['password'] == null) $data['password'] = $user->password;
-
-        if($data['password'] != $user->password){
-            if (!Hash::check($data['password'], $user->password)) {
-                $data['password'] = Hash::make($data['password']);
-            }else{
-                $data['password'] = $user->password;
-            }
-        }
-
         try{
+            $user = User::findOrFail($id);
+
+            $request->validate(User::$rules, User::$rulesMessage);
+
+            $data = $request->all();
+
+            $data['image'] = $this->uploadImage($request) ?? $user->image;
+
+            if($data['password'] == null) $data['password'] = $user->password;
+
+            if($data['password'] != $user->password){
+                if (!Hash::check($data['password'], $user->password)) {
+                    $data['password'] = Hash::make($data['password']);
+                }else{
+                    $data['password'] = $user->password;
+                }
+            }
+
             DB::transaction(function () use ($user, $data) {
                 $user->update($data);
             });
@@ -100,25 +105,25 @@ class UsersService
 
     public function editProfile(Request $request, int $id){
 
-        $user = User::findOrFail($id);
-
-        $request->validate(User::$rules, User::$rulesMessage);
-
-        $data = $request->all();
-
-        $data['image'] = $this->uploadImage($request) ?? $user->image;
-
-        if($data['password'] == null) $data['password'] = $user->password;
-
-        if($data['password'] != $user->password){
-            if (!Hash::check($data['password'], $user->password)) {
-                $data['password'] = Hash::make($data['password']);
-            }else{
-                $data['password'] = $user->password;
-            }
-        }
-
         try{
+            $user = User::findOrFail($id);
+
+            $request->validate(User::$rules, User::$rulesMessage);
+
+            $data = $request->all();
+
+            $data['image'] = $this->uploadImage($request) ?? $user->image;
+
+            if($data['password'] == null) $data['password'] = $user->password;
+
+            if($data['password'] != $user->password){
+                if (!Hash::check($data['password'], $user->password)) {
+                    $data['password'] = Hash::make($data['password']);
+                }else{
+                    $data['password'] = $user->password;
+                }
+            }
+
             DB::transaction(function () use ($user, $data) {
                 $user->update($data);
             });
@@ -133,8 +138,8 @@ class UsersService
 
 
     public function delete(int $id){
-        $user = User::findOrFail($id);
         try{
+            $user = User::findOrFail($id);
             // TRANSACTION: En caso success de las querys emitira un commit, caso de error hara un rollback
             //use ($data)  me permite especificar los parametros que se le pasan a dicha funcion, caso contrario no va a poder leer el $data del create
             DB::transaction(function () use ($user) {
@@ -146,21 +151,18 @@ class UsersService
             ])->withInput();
         }
 
-        return $this->toRoute('admin.users.index')->with('message.success','El usuario <b>'.e($user->name).'</b> fue eliminado exitosamente.');    }
+        return $this->toRoute('admin.users.index')->with('message.success','El usuario <b>'.e($user->name).'</b> fue eliminado exitosamente.');
+    }
 
 
     protected function uploadImage(Request $request, string $field='image') : string|null {
         if($request->hasFile($field) && $request->file($field)->isValid()){
-
-            // dd($request);
             $filename = date('YmdHis_').".".$request->file($field)->extension();
-
             Image::make($request->file($field))
                 ->resize(500,500, function($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save(public_path('images/'.$filename));
-
             return $filename;
         }
         return null;

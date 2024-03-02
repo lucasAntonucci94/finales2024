@@ -72,7 +72,7 @@
                             <a class="btn btn-secondary btn-sm mr-2" href="{{ route('products.show', ['id' => $product->id_product]) }}">Ver</a>
                         </form>
                       @else
-                      <a class="btn btn-secondary w-100" href="{{ route('products.show', ['id' => $product->id_product]) }}">Ver</a>
+                      <a class="btn btn-secondary w-100 mt-2" href="{{ route('products.show', ['id' => $product->id_product]) }}">Ver</a>
                       @endif
                 </div>
             </div>

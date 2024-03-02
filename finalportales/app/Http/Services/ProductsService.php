@@ -42,26 +42,42 @@ class ProductsService
         ]);
     }
 
-    public function createProduct(Request $request){
+    // public function createProduct(Request $request){
 
-        $request->validate(Product::$rules, Product::$rulesMessage);
-        $data = $request->all();
-        $data['image'] = $this->uploadImage($request);
+    //     try{
+    //         $request->validate(Product::$rules, Product::$rulesMessage);
+    //         $data = $request->all();
+    //         $data['image'] = $this->uploadImage($request);
 
-        try{
-           DB::transaction(function () use ($data) {
+    //        DB::transaction(function () use ($data) {
+    //            $product = Product::create($data);
+               
+    //            $product->genres()->attach($data['id_genre'] ?? []);
+    //         });
+    //     }catch(Exception $e){
+    //         return $this->toRoute('create.form.product',[
+    //             'error' => 'El producto no se pudo crear por un error en la base de datos.'
+    //         ])->withInput();
+    //     }
+    //     return $this->toRoute('admin.products.index')->with('message.success','El producto <b>'.e($data['detail']).'</b> se agrego con exito.');;
+    // }
+    public function createProduct(Request $request): Product
+    {
+        try {
+            $request->validate(Product::$rules, Product::$rulesMessage);
+            $data = $request->all();
+            $data['image'] = $this->uploadImage($request);
+
+            $response = DB::transaction(function () use ($data) {
                 $product = Product::create($data);
-
                 $product->genres()->attach($data['id_genre'] ?? []);
+                return $product;
             });
-        }catch(Exception $e){
-            return $this->toRoute('create.form.product',[
-                'error' => 'El producto no se pudo crear por un error en la base de datos.'
-            ])->withInput();
-        }
-        return $this->toRoute('admin.products.index')->with('message.success','El producto <b>'.e($data['detail']).'</b> se agrego con exito.');;
+            return $response;
+        } catch (Exception $e) {
+            throw new Exception('Error al crear el producto: ' . $e->getMessage());
+        }   
     }
-
     public function getById($id){
         return Product::findOrFail($id);
     }
@@ -81,23 +97,25 @@ class ProductsService
     }
 
     public function editProduct(Request $request, int $id){
-        $product = Product::findOrFail($id);
-
-        $request->validate(Product::$rules, Product::$rulesMessage);
-
-        $data = $request->all();
-        // Obtener imagen enviada mediante formulario como archivo adjunto
-        // if($request->hasFile('image'))
-        //     $data['image'] = $this->uploadImage($request);
-
-        $data['image'] = $this->uploadImage($request) ?? $product->image;
-
         try{
-             DB::transaction(function () use ($product, $data) {
+            $product = Product::findOrFail($id);
+
+            $request->validate(Product::$rules, Product::$rulesMessage);
+
+            $data = $request->all();
+            // Obtener imagen enviada mediante formulario como archivo adjunto
+            // if($request->hasFile('image'))
+            //     $data['image'] = $this->uploadImage($request);
+
+            $data['image'] = $this->uploadImage($request) ?? $product->image;
+
+             $response =DB::transaction(function () use ($product, $data) {
                 $product->update($data);
 
                 $product->genres()->sync($data['id_genre'] ?? []);
+                return $product;
             });
+            return $response;
         }catch(Exception $e){
             return $this->toRoute('create.form.product',[
                 'error' => 'El producto no se pudo crear por un error en la base de datos.'
@@ -121,7 +139,8 @@ class ProductsService
             ])->withInput();
         }
 
-        return $this->toRoute('admin.products.index')->with('message.success','El producto <b>'.e($product->detail).'</b> fue eliminado exitosamente.');    }
+        return $this->toRoute('admin.products.index')->with('message.success','El producto <b>'.e($product->detail).'</b> fue eliminado exitosamente.');
+    }
 
 
     protected function uploadImage(Request $request, string $field='image') : string|null {

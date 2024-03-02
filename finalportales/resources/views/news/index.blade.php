@@ -11,7 +11,7 @@
     @if($news->isNotEmpty())
     <div class="row d-flex justify-content-around align-items-center deleteRowMargin">
         @foreach($news as $new)
-        <div class="col-10 rounded border-secondary text-center border m-4 p-2">
+        <div class="col-7 rounded border-secondary text-center border m-4 p-2">
             @if ($new->image != '' && file_exists('images/'.$new->image))
                 @php
                     [$w,$h,$type,$attrs] = getimagesize('images/'.$new->image);

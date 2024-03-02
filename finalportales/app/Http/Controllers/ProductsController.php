@@ -17,11 +17,11 @@ class ProductsController extends Controller
     public function getAll(Request $request){
         $products = $this->getProductService()->getAll($request);
         // dd(auth()->user());
-        $orders = (auth()->user() == null) ? [] : $this->getOrdersService()->getByUserId(auth()->user()->id);
+        // $orders = (auth()->user() == null) ? [] : $this->getOrdersService()->getByUserId(auth()->user()->id);
 
         return view('products/index',[
             'products'=> $products,
-            'orders'=> $orders,
+            // 'orders'=> $orders,
             'q'=> $request->has('q') ? $request->query('q') : null,
         ]);
     }

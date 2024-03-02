@@ -24,7 +24,7 @@
         </div>
     @endif
         <div class="row thisRow">
-            <div class="col-8 text-white  p-5 rounded border border-light bg-dark2">
+            <div class="col-5 text-white  p-5 rounded border border-light bg-dark2">
                     <h1 class="text-center">Iniciar Sesión</h1>
                     <p class="text-center py-1">Ingrese sus credenciales para acceder al sitio.</p>
                     <form action="{{route('auth.login')}}" method="post">

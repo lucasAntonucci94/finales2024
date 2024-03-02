@@ -3,8 +3,7 @@
 @section('title','Perfil Usuario: '.$user->name)
 
 @section('main')
-<div class="container-fluid">
-    <div class="row py-4 bg-light">
+    <div class="row py-4 bg-light deleteRowMargin">
         <div class="col-12 text-center">
             <h1>Perfil de usuario: {{ $user->name }}</h1>
         </div>
@@ -61,5 +60,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

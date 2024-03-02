@@ -208,23 +208,6 @@ class OrdersService
         return $this->toRoute($backurl)->with('message.success','El producto <b>ID: '.e($orderItem->id).'</b> fue eliminado exitosamente.');
     }
 
-
-    // protected function uploadImage(Request $request, string $field='image') : string|null {
-    //     if($request->hasFile($field) && $request->file($field)->isValid()){
-
-    //         // dd($request);
-    //         $filename = date('YmdHis_').".".$request->file($field)->extension();
-
-    //         Image::make($request->file($field))
-    //             ->resize(500,500, function($constraint) {
-    //                 $constraint->aspectRatio();
-    //                 $constraint->upsize();
-    //             })->save(public_path('images/'.$filename));
-
-    //         return $filename;
-    //     }
-    //     return null;
-    // }
     public function getProductsService(){
         return new ProductsService;
     }

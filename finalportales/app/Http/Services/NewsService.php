@@ -29,26 +29,43 @@ class NewsService
             'genres'=> Genre::all(),
         ]);
     }
+    
+    // public function createNew(Request $request){
+    //     // dd($request);
+    //     $request->validate(News::$rules, News::$rulesMessage);
+    //     $data = $request->all();
 
-    public function createNew(Request $request){
-        // dd($request);
-        $request->validate(News::$rules, News::$rulesMessage);
-        $data = $request->all();
+    //     $data['image'] = $this->uploadImage($request);
 
-        $data['image'] = $this->uploadImage($request);
+    //     try{
+    //        DB::transaction(function () use ($data) {
+    //             $new = News::create($data);
 
-        try{
-           DB::transaction(function () use ($data) {
+    //             $new->genres()->attach($data['id_genre'] ?? []);
+    //         });
+    //     }catch(Exception $e){
+    //         return $this->toRoute('create.form.new',[
+    //             'error' => 'La noticia no se pudo crear por un error en la base de datos.'
+    //         ])->withInput();
+    //     }
+    //     return $this->toRoute('admin.news.index')->with('message.success','La noticia <b>'.e($data['title']).'</b> se agrego con exito.');;
+    // }
+    public function createNew(Request $request): News
+    {
+        try {
+            $request->validate(News::$rules, News::$rulesMessage);
+            $data = $request->all();
+            $data['image'] = $this->uploadImage($request);
+
+            $response = DB::transaction(function () use ($data) {
                 $new = News::create($data);
-
                 $new->genres()->attach($data['id_genre'] ?? []);
+                return $new;
             });
-        }catch(Exception $e){
-            return $this->toRoute('create.form.new',[
-                'error' => 'La noticia no se pudo crear por un error en la base de datos.'
-            ])->withInput();
-        }
-        return $this->toRoute('admin.news.index')->with('message.success','La noticia <b>'.e($data['title']).'</b> se agrego con exito.');;
+            return $response;
+        } catch (Exception $e) {
+            throw new Exception('Error al crear la noticia: ' . $e->getMessage());
+        }   
     }
 
     public function getById($id){
@@ -66,19 +83,21 @@ class NewsService
     }
 
     public function editNew(Request $request, int $id){
-        $new = News::findOrFail($id);
-
-        $request->validate(News::$rules, News::$rulesMessage);
-
-        $data = $request->all();
-        $data['image'] = $this->uploadImage($request) ?? $new->image;
-
         try{
-            DB::transaction(function () use ($new, $data) {
+            $new = News::findOrFail($id);
+
+            $request->validate(News::$rules, News::$rulesMessage);
+
+            $data = $request->all();
+            $data['image'] = $this->uploadImage($request) ?? $new->image;
+
+            $response = DB::transaction(function () use ($new, $data) {
                 $new->update($data);
 
                 $new->genres()->sync($data['id_genre'] ?? []);
+                return $new;
             });
+            return $response;
         }catch(Exception $e){
             return $this->toRoute('create.form.new',[
                 'error' => 'La noticia no se pudo crear por un error en la base de datos.'
