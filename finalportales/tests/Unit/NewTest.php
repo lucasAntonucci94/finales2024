@@ -25,12 +25,13 @@ class NewsServiceTest extends TestCase
         parent::setUp();
         $this->service = new NewsService();
     }
+    
     /**
      * Verifica de obtener los noticias y que no este vacio.
      *
      * @return void
      */
-    public function test_get_all_news_not_empty()
+    public function test_get_all_not_empty()
     {
         $news = $this->service->getAll(new Request);
         $this->assertNotEmpty($news);
@@ -41,7 +42,7 @@ class NewsServiceTest extends TestCase
      *
      * @return void
      */
-    public function test_get_all_news_paginated_not_empty()
+    public function test_get_all_paginated_not_empty()
     {
         $news = $this->service->getPaginated(new Request);
         $this->assertNotEmpty($news);
@@ -73,7 +74,7 @@ class NewsServiceTest extends TestCase
      *
      * @return void
      */ 
-    public function test_create_with_valid_data_creates_new_and_returns_success()
+    public function test_create_new_with_valid_data()
     {
         $data = [
             'title' => random_int(1, 10000).'Noticia de prueba'.random_int(1, 10000),
@@ -107,7 +108,7 @@ class NewsServiceTest extends TestCase
      *
      * @return void
      */
-    public function test_edit_with_valid_data_creates_new_and_returns_success()
+    public function test_edit_new_with_valid_data()
     {
         try {
             $lastNew = News::latest()->first();

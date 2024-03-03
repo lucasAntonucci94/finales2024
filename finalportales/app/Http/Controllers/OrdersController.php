@@ -11,12 +11,27 @@ use Illuminate\Support\Facades\Auth;
 class OrdersController extends Controller
 {
     public function createOrder(Request $request){
-        return  $this->getOrdersService()->createOrder($request);
+        try{
+            $order = $this->getOrdersService()->createOrder($request);
+            if($order){
+                return redirect()->route('products.index')->with('message.success', 'El producto seleccionado se agregó con éxito.');
+            }
+        } catch (Exception $e) {
+            return redirect()->route('products.index')->with('error', 'El producto no se pudo crear por un error, vuelva a intentarlo.')->withInput();
+        }
     }
 
     public function editOrder(Request $request, int $id){
-        // dd($request);
-        return  $this->getOrdersService()->editOrder($request,$id);
+        try{
+            $order = $this->getOrdersService()->editOrder($request,$id);
+            if($order){
+                return $this->toRoute('admin.orders.index')->with('message.success','El pedido <b>ID: '.e($order->id).'</b> fue editado exitosamente.');
+            }
+        } catch (Exception $e) {
+            return $this->toRoute('edit.form.order',[
+                'error' => 'El estado del pedido no se pudo actualizar por un error en la base de datos.'
+            ])->withInput();
+        }
     }
 
     public function deleteOrder(int $id, string $backurl){
@@ -113,7 +128,15 @@ class OrdersController extends Controller
 
     public function updateQuantity(Request $request)
     {
-        return  $this->getOrdersService()->updateQuantity($request);
+        try{
+            $orderItem = $this->getOrdersService()->updateQuantity($request);
+            if($orderItem){
+                return redirect()->route('order.checkout')->with('message.success', 'Cantidad actualizada satisfactoriamente.');
+            }
+        } catch (Exception $e) {
+            return redirect()->route('order.checkout')->with('error', 'Ocurrio un error al intentar actualizar el item.')->withInput();
+        }
+        // return  $this->getOrdersService()->updateQuantity($request);
     }
 
     public function getUsersService(){

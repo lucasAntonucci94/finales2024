@@ -25,12 +25,13 @@ class ProductsServiceTest extends TestCase
         parent::setUp();
         $this->service = new ProductsService();
     }
+    
     /**
      * Verifica de obtener los productos y que no este vacio.
      *
      * @return void
      */
-    public function test_get_all_products_not_empty()
+    public function test_get_all_not_empty()
     {
         $products = $this->service->getAll(new Request);
         $this->assertNotEmpty($products);
@@ -41,7 +42,7 @@ class ProductsServiceTest extends TestCase
      *
      * @return void
      */
-    public function test_get_all_products_paginated_not_empty()
+    public function test_get_all_paginated_not_empty()
     {
         $products = $this->service->getPaginated(new Request);
         $this->assertNotEmpty($products);
@@ -91,7 +92,7 @@ class ProductsServiceTest extends TestCase
      *
      * @return void
      */ 
-    public function test_create_with_valid_data_creates_product_and_returns_success()
+    public function test_create_product_with_valid_data()
     {
         $data = [
             'detail' => random_int(1, 10000).'Producto de prueba'.random_int(1, 10000),
@@ -137,7 +138,7 @@ class ProductsServiceTest extends TestCase
      *
      * @return void
      */
-    public function test_edit_with_valid_data_creates_product_and_returns_success()
+    public function test_edit_product_with_valid_data()
     {
         try {
             $lastProduct = Product::latest()->first();

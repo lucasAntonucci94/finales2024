@@ -13,7 +13,7 @@ use App\Http\Services\ProductsService;
 class OrdersService
 {
     public function getAll(Request $request){
-        $queryOrders = Order::with(['user','items.product'])->where('enabled', true);
+        $queryOrders = Order::with(['user','items.product']);
         return $queryOrders->get();
     }
    
@@ -35,6 +35,7 @@ class OrdersService
 
     public function createOrder(Request $request)
     {
+        try {
         // Validate the request data
         // $validator = Validator::make($request->all(), Order::$rules, Order::$rulesMessage);
         
@@ -44,13 +45,12 @@ class OrdersService
         // }
     
         // Begin a database transaction
-        DB::beginTransaction();
+            DB::beginTransaction();
     
-        try {
             $hasProduct = false;
             $data = $request->all();
             $oldOrder = $this->getByUserId($data['id_user']);
-
+           
             if ($oldOrder === null) {
                 $order = Order::create([
                     'id_user' => $data['id_user'],
@@ -70,7 +70,7 @@ class OrdersService
                     $hasProduct = true;
                 }
             }
-
+          
             if (!$hasProduct) {
                 OrderItem::create([
                     'order_id' => $order->id,
@@ -78,42 +78,27 @@ class OrdersService
                     'quantity' => (int)$data['quantity'],
                 ]);
             }
-        
             DB::commit();
-            return redirect()->route('products.index')->with('message.success', 'La orden se agregó con éxito.');
+            return $order;
         } catch (Exception $e) {
             DB::rollback();
             return redirect()->route('products.index')->with('error', 'La orden no se pudo crear por un error, vuelva a intentarlo.')->withInput();
         }
     }
+
     public function updateQuantity(Request $request)
     {
-        $itemId = $request->input('item_id');
-        $newQuantity = $request->input('new_quantity');
-        // Validate data
-        $request->validate([
-            'item_id' => 'required|integer|exists:order_items,id',
-            'new_quantity' => 'required|integer|min:1|max:' . 100,
-        ]);
-        // dd([
-        //     'item_id' => $itemId,
-        //     'new_quantity' => $newQuantity,
-        // ]);
-
-        // Update the item quantity in the database
-        // OrderItem::where('id', $itemId)->update(['quantity' => $newQuantity]);
-
-        // Validate the request data
-        // $validator = Validator::make($request->all(), Order::$rules, Order::$rulesMessage);
-        
-        // // If validation fails, redirect back with error messages
-        // if ($validator->fails()) {
-        //     return redirect()->route('order.checkout')->withErrors($validator)->withInput();
-        // }
-    
-        DB::beginTransaction();
-
         try {
+            $itemId = $request->input('item_id');
+            $newQuantity = $request->input('new_quantity');
+            // Validate data
+            $request->validate([
+                'item_id' => 'required|integer|exists:order_items,id',
+                'new_quantity' => 'required|integer|min:1|max:' . 100,
+            ]);
+    
+            DB::beginTransaction();
+
             $orderItem = OrderItem::where('id', $itemId)
                 ->first();
             if ($orderItem) {
@@ -122,7 +107,8 @@ class OrdersService
             }
         
             DB::commit();
-            return redirect()->route('order.checkout')->with('message.success', 'Cantidad actualizada satisfactoriamente.');
+            // return redirect()->route('order.checkout')->with('message.success', 'Cantidad actualizada satisfactoriamente.');
+            return $orderItem;
         } catch (Exception $e) {
             DB::rollback();
             return redirect()->route('order.checkout')->with('error', 'Ocurrio un error al intentar actualizar el item.')->withInput();
@@ -163,16 +149,16 @@ class OrdersService
             $request->validate(Order::$rules, Order::$rulesMessage);
 
             $data = $request->all();
-            DB::transaction(function () use ($order, $data) {
+            $order = DB::transaction(function () use ($order, $data) {
                 $order->update(['status' => $data['status']]);
+                return $order;
             });
+            return $order;
         }catch(Exception $e){
             return $this->toRoute('edit.form.order',[
                 'error' => 'El estado del pedido no se pudo actualizar por un error en la base de datos.'
             ])->withInput();
         }
-
-         return $this->toRoute('admin.orders.index')->with('message.success','El pedido <b>ID: '.e($order->id).'</b> fue editado exitosamente.');
     }
 
 

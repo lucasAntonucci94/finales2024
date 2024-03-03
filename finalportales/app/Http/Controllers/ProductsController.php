@@ -16,8 +16,6 @@ class ProductsController extends Controller
 
     public function getAll(Request $request){
         $products = $this->getProductService()->getAll($request);
-        // dd(auth()->user());
-        // $orders = (auth()->user() == null) ? [] : $this->getOrdersService()->getByUserId(auth()->user()->id);
 
         return view('products/index',[
             'products'=> $products,
@@ -41,11 +39,29 @@ class ProductsController extends Controller
     }
 
     public function createProduct(Request $request){
-        return  $this->getProductService()->createProduct($request);
+        try{
+            $product = $this->getProductService()->createProduct($request);
+            if($product != null){
+                return $this->toRoute('admin.products.index')->with('message.success','El producto <b>'.e($product->detail).'</b> se agrego con exito.');;
+            }
+        }catch(Exception $e){
+            return $this->toRoute('create.form.product',[
+                'error' => 'El producto no se pudo crear por un error en la base de datos.'
+            ])->withInput();
+        }
     }
 
     public function editProduct(Request $request, int $id){
-        return  $this->getProductService()->editProduct($request,$id);
+        try{
+            $product = $this->getProductService()->editProduct($request,$id);
+            if($product != null){
+                return $this->toRoute('admin.products.index')->with('message.success','El producto <b>'.e($product->detail).'</b> se edito con exito.');;
+            }
+        }catch(Exception $e){
+            return $this->toRoute('create.form.product',[
+                'error' => 'El producto no se pudo editar por un error en la base de datos.'
+            ])->withInput();
+        }
     }
 
     public function deleteProduct(int $id){

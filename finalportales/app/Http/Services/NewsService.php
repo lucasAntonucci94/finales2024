@@ -30,26 +30,6 @@ class NewsService
         ]);
     }
     
-    // public function createNew(Request $request){
-    //     // dd($request);
-    //     $request->validate(News::$rules, News::$rulesMessage);
-    //     $data = $request->all();
-
-    //     $data['image'] = $this->uploadImage($request);
-
-    //     try{
-    //        DB::transaction(function () use ($data) {
-    //             $new = News::create($data);
-
-    //             $new->genres()->attach($data['id_genre'] ?? []);
-    //         });
-    //     }catch(Exception $e){
-    //         return $this->toRoute('create.form.new',[
-    //             'error' => 'La noticia no se pudo crear por un error en la base de datos.'
-    //         ])->withInput();
-    //     }
-    //     return $this->toRoute('admin.news.index')->with('message.success','La noticia <b>'.e($data['title']).'</b> se agrego con exito.');;
-    // }
     public function createNew(Request $request): News
     {
         try {
@@ -103,8 +83,6 @@ class NewsService
                 'error' => 'La noticia no se pudo crear por un error en la base de datos.'
             ])->withInput();
         }
-
-         return $this->toRoute('admin.news.index')->with('message.success','La noticia <b>'.e($new->detail).'</b> fue editado exitosamente.');
     }
 
 
