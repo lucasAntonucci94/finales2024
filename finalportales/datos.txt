@@ -6,3 +6,51 @@ Comisión: dwn4av
 Docente: Santiago Gallino
 Carácter: Proyecto Final
 Alumnos: Antonucci Lucas, Yamamoto Ana Paula
+
+Otros datos de importancia:
+
+Para ejecutar las pruebas unitarias yo implemente una tabla espejo de mysql, mas que espejo una nueva tabla, a la cual se le debe correr el migration y los seeders, final_portales_la_test.
+Como lo hago yo, en env. modifico el valor de la configuracion de la tabla principal DB_DATABASE=final_portales_la
+al siguiente DB_DATABASE=final_portales_la_test
+Una vez hecho esto y creada la tabla test en phpmyadmin, corro php artisan migrate --seed, y verifico que se haya cargado tanto las tablas como los datos de prueba.
+Con estos pasos ya esta todo listo para correr las pruebas unitarias. Obvio no nos olvidemos de poner la config en env como estaba (Y).
+
+verificar que pase los siguientes test:
+
+   PASS  Tests\Unit\NewsServiceTest
+  ✓ get all not empty
+  ✓ get all paginated not empty
+  ✓ get paginated with search returns filtered results
+  ✓ create new with valid data
+  ✓ edit new with valid data
+  ✓ delete with valid id and returns success
+
+   PASS  Tests\Unit\OrdersServiceTest
+  ✓ get all orders not empty
+  ✓ get sale orders not empty
+  ✓ get all orders paginated not empty
+  ✓ get paginated with search returns filtered results
+  ✓ create order with valid data
+  ✓ edit order with valid data
+  ✓ update quantity order item with valid data
+  ✓ delete order with valid data
+
+   PASS  Tests\Unit\ProductsServiceTest
+  ✓ get all not empty
+  ✓ get all paginated not empty
+  ✓ get all with search returns filtered results
+  ✓ get paginated with search returns filtered results
+  ✓ create product with valid data
+  ✓ edit product with valid data
+  ✓ delete with valid id and returns success
+
+  Tests:  21 passed
+
+----------------------------------------------------------
+usuario admin: lucas.e.antonucci@gmail.com  Ab123456
+usuario normal: sanches.juan@gmail.com  Ab123456
+
+usuario para pruebas de MERCADOPAGO: nayla.pecorelli@gmail.com  Ab123456  
+(puede ser cualquier usuario excepto lucas.e.antonucci@gmail.com,
+ ya que es mi mail de mi usuario personal, por lo que te va a rebotar el sandbox.
+ Ademas es el mail con el que registre la app en mercadopago y no es valido para hacer las pruebas, notificandonos que no puedo pagarme a mi mismo.)
