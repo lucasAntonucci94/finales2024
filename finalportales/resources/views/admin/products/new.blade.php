@@ -210,20 +210,18 @@
         const countrySelect = document.getElementById("id_country");
         const providerSelect = document.getElementById("id_provider");
 
-        // Add event listeners for both select boxes
         countrySelect.addEventListener("change", handleSelectChange);
         providerSelect.addEventListener("change", handleSelectChange);
 
         function handleSelectChange(event) {
-        const selectElement = event.target; // Get the select element that triggered the event
+        const selectElement = event.target;
 
-        // Check if a valid option is selected (value is not empty)
         if (selectElement.value !== "") {
-            selectElement.classList.add("is-valid"); // Add "is-valid" class to the selected option
-            selectElement.classList.remove("is-invalid"); // Remove any previous "is-invalid" class
+            selectElement.classList.add("is-valid");
+            selectElement.classList.remove("is-invalid");
         } else {
-            selectElement.classList.remove("is-valid"); // Remove "is-valid" class if no option is selected
-            selectElement.classList.add("is-invalid"); // Add "is-invalid" class to indicate error
+            selectElement.classList.remove("is-valid");
+            selectElement.classList.add("is-invalid");
         }
         }
 
