@@ -7,7 +7,7 @@ use App\Http\Services\OrdersService;
 use App\Http\Services\UsersService;
 use App\Http\Services\MercadoPagoService;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class OrdersController extends Controller
 {
     public function createOrder(Request $request){
@@ -93,6 +93,7 @@ class OrdersController extends Controller
                       'order_id' => $order->id,
                       'items' => $order->items,
                       'status' => $order->status,
+                      'created_at' => Carbon::parse($order->created_at)->format('d/m/Y H:i:s'),
                       'total' => $total,
                     ];
                 }

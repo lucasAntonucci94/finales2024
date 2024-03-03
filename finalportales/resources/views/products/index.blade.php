@@ -5,7 +5,7 @@
 @section('main')
     <div class="container-fluid bg-light container-padding">
         <div class="bg-secondary d-flex justify-content-around align-items-center">
-            <h2 class="w-100 text-center text-white py-5">Catalogo de productos</h2>
+            <h2 class="w-100 text-center text-white py-5">Catálogo de productos</h2>
         </div>
         @if (Session::has('message.success'))
             <div class="alert text-center alert-success alert-dismissible fade show">
@@ -28,8 +28,8 @@
         <div class="d-flex justify-content-around align-items-center w-100">
             <h1 class="w-100 sr-only">Buscador</h2>
             <form action="{{ route('products.index') }}" method="get" class="d-flex py-3">
-                <label class="form-label sr-only" for="q">Titulo</label>
-                <input id="q" class="form-control" type="search" name="q" placeholder="busqueda por titulo"
+                <label class="form-label sr-only" for="q">Título</label>
+                <input id="q" class="form-control" type="search" name="q" placeholder="búsqueda por título"
                     style="width: 850px;" value={{ $q }}>
                 <button class="btn btn-primary mx-2" type="submit">Buscar</button>
             </form>
@@ -53,7 +53,7 @@
               @forelse ($product->genres as $genre)
                 <span class="badge bg-secondary text-white">{{ $genre->name }}</span>
               @empty
-                <span class="badge bg-secondary text-white mt-1">Sin genero</span>
+                <span class="badge bg-secondary text-white mt-1">Sin género</span>
               @endforelse
                 <div>
                     @if (auth()->user() != null)

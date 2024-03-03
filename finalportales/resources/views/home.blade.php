@@ -50,7 +50,7 @@
                 <p class="pt-3">
                     <b> NOVEDADES </b>
                     <br>
-                    <span>No te pierdas de todas las ultimas novedades acerca de las animaciones que mas te gustan.</span>
+                    <span>No te pierdas todas las últimas novedades acerca de las animaciones que más te gustan.</span>
                 </p>
             </a>
         </div>

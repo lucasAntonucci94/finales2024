@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
-@section('title','Pantalla Ver newo: '.$new->detail)
+@section('title','Pantalla Ver Noticia: '.$new->detail)
 
 @section('main')
 <div class="container container-padding">
 
-    <h1 class="w-100 text-center my-5 textBreak">{{$new->title}} </h1>
-    <div class="text-center">
+    <h1 class="w-100 text-center mt-3 textBreak">{{$new->title}} </h1>
+    <div class="text-center p-3">
         @if ($new->image != '' && file_exists('images/'.$new->image))
             @php
                 [$w,$h,$type,$attrs] = getimagesize('images/'.$new->image);
@@ -18,7 +18,7 @@
                 >
         @endif
     </div>
-    <dl class="py-3" >
+    <dl class="p-3" >
         <div class="d-flex">
             <dd class="mr-2 d-none">Categorías:</dd>
             <dt class="pb-4">
@@ -43,8 +43,8 @@
                 <dt  class="textBreak">{{$new->description}}</dt>
             </div>
         </div>
+        <a href="{{url('news')}}" class="btn btn-secondary my-2 w-100">VOLVER</a>
     </dl>
 
-    <a href="{{url('news')}}" class="btn btn-secondary my-1 w-100">VOLVER</a>
 </div>
 @endsection

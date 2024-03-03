@@ -28,6 +28,7 @@
                 <div class="bg-white p-3 mb-3 d-flex flex-column">
                     <h4 class="mb-3">Resumen de la compra {{$order["order_id"]}}</h4>
                     <p class="mb-3">Estado de la compra: <span class="font-weight-bold">{{$order["status"]}}</span></p>
+                    <p class="mb-3">Fecha: <span class="font-weight-bold">{{$order["created_at"]}}</span></p>
                     <ul class="list-group">
                         @foreach($order["items"] as $item)
                         <li class="list-group-item d-flex justify-content-between align-items-center">

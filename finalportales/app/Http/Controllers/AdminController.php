@@ -15,7 +15,7 @@ use App\Http\Services\ProductsService;
 use App\Http\Services\NewsService;
 use App\Http\Services\UsersService;
 use App\Http\Services\OrdersService;
-
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -131,6 +131,7 @@ class AdminController extends Controller
                       'order_id' => $order->id,
                       'items' => $order->items,
                       'status' => $order->status,
+                      'created_at' => Carbon::parse($order->created_at)->format('d/m/Y H:i:s'),
                       'total' => $total,
                       'backurl'=>$backurl,
                     ];

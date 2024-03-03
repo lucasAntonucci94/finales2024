@@ -46,7 +46,7 @@
                     class="form-control"
                     type="search"
                     name="q"
-                    placeholder="busqueda por email"
+                    placeholder="búsqueda por email"
                     style="width: 850px;"
                     value={{ $q }}
                 >

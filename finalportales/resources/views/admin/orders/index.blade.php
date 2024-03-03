@@ -45,7 +45,7 @@
                 class="form-control"
                 type="search"
                 name="q"
-                placeholder="busqueda por nombre de usuario"
+                placeholder="búsqueda por nombre de usuario"
                 style="width: 850px;"
                 value={{ $q }}
                 >

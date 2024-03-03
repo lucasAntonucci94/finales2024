@@ -26,9 +26,9 @@
     </div>
     <div class="row text-center justify-content-center deleteRowMargin" style="min-height: 450px; padding: 0px; width: 100%;">
         <div class="col-6" style="align-self: center;">
-            <h2>¿Quienes somos?</h2>
+            <h2>¿Quiénes somos?</h2>
             <p class="pt-3">
-               <b>TODO SOBRE MANGAS</b> es una editorial dedicada a la venta y distrubición de arte literario en Argentina.
+               <b>TODO SOBRE MANGAS</b> es una editorial dedicada a la venta y distribución de arte literario en Argentina.
                 Trabajamos principalmente con IVREA una de las mayores editoriales del país, así como con proveedores del exterior, pudiendo ofrecer una gran variedad de productos dentro de nuestro catálogo.
             </p>
         </div>

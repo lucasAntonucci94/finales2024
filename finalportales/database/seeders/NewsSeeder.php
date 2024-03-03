@@ -34,7 +34,7 @@ class NewsSeeder extends Seeder
                 'id_user'=>1,
                 'title'=>'BERSERK 2022',
                 'detail'=>'Panini Manga publicará el vol. 41 de Berserk a finales de 2022',
-                'description'=>'Aprovechando el anuncio de la continuación de Berserk este mismo mes de junio, Panini Manga anuncia la publicación en España del tomo nº 41 de este icónico manga para finales de este año 2022. Además, detalla que este esperado volumen se publicará con extras y algunas sorpresas de las que se darán más detalles según se vaya acercando la fecha de su publicación.',
+                'description'=>'Aprovechando el anuncio de la continuación de Berserk este mismo mes de junio, Panini Manga anuncia la publicación en España del tomo nº 41 de este icónico manga para finales de este año 2022. Además, detalla que esté esperado volumen se publicará con extras y algunas sorpresas de las que se darán más detalles según se vaya acercando la fecha de su publicación.',
                 'image'=>'berserknews.jpg',
                 'date'=>date('Y-m-d H:i:s'),
                 'created_at'=>date('Y-m-d H:i:s'),

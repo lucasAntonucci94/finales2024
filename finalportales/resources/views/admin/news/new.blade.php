@@ -90,7 +90,7 @@
                 <div class="row d-flex">
                 <div class="col-12 my-2 d-flex flex-wrap justify-content-between">
                                 <fieldset class="border border-secondary rounded p-3 shadow-sm">
-                                    <legend class="font-weight-bold text-center border-bottom pb-2">Generos</legend>
+                                    <legend class="font-weight-bold text-center border-bottom pb-2">géneros</legend>
                                     <div class="row">
                                     @foreach($genres as $genre)
                                         <div class="col-md-6 col-sm-6 d-flex justify-content-between">

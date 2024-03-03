@@ -84,7 +84,7 @@
                     @endforeach
 
                     <fieldset class=""  style="width:650px; margin: 0 auto;">
-                        <legend>Generos</legend>
+                        <legend>géneros</legend>
                         @foreach($genres as $genre)
                             <div class="form-check form-check-inline">
                                 <input

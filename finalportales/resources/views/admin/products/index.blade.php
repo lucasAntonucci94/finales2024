@@ -45,13 +45,13 @@
     <div class="d-flex justify-content-around align-items-center w-100">
         <h2 class="w-100 sr-only">Buscador</h2>
         <form action="{{ route('admin.products.index') }}" method="get" class="d-flex py-3">
-            <label class="form-label sr-only" for="q" >Titulo</label>
+            <label class="form-label sr-only" for="q" >Título</label>
             <input
                 id="q"
                 class="form-control"
                 type="search"
                 name="q"
-                placeholder="busqueda por nombre"
+                placeholder="búsqueda por nombre"
                 style="width: 850px;"
                 value={{ $q }}
                 >
@@ -67,7 +67,7 @@
                 {{-- <th>Descripcion</th> --}}
                 <th>Precio</th>
                 {{-- <th>Pais</th> --}}
-                <th>Generos</th>
+                <th>géneros</th>
                 <th>Fecha de fabricación</th>
                 <th>Acciones</th>
             </tr>
@@ -86,7 +86,7 @@
                    @forelse($product->genres as $genre)
                         <span class="badge bg-secondary text-white">{{$genre->name}}</span>
                     @empty
-                        <p>No tiene genero</p>
+                        <p>No tiene género</p>
                     @endforelse
                 </td>
                 <td>{{$product->date->format(__('dates.format'))}}</td>

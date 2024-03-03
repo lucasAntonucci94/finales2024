@@ -41,13 +41,13 @@
 <div class="d-flex justify-content-around align-items-center w-100">
     <h2 class="w-100 sr-only">Buscador</h2>
     <form action="{{ route('admin.news.index') }}" method="get" class="d-flex py-3">
-        <label class="form-label sr-only" for="q" >Titulo</label>
+        <label class="form-label sr-only" for="q" >Título</label>
         <input
             id="q"
             class="form-control"
             type="search"
             name="q"
-            placeholder="busqueda por titulo"
+            placeholder="búsqueda por título"
             style="width: 850px;"
             value={{ $q }}
             >
@@ -63,7 +63,7 @@
             {{-- <th>Detalle</th> --}}
             {{-- <th>Contenido</th> --}}
             <th>Creador</th>
-            <th>Generos</th>
+            <th>géneros</th>
             <th>Fecha de Creación</th>
             <th>Acciones</th>
         </tr>

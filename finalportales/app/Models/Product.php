@@ -85,7 +85,7 @@ class Product extends Model
             Genre::class,
             'products_has_genres', //tabla pivot de mi relacion
             'id_product', //id_fk para productos
-            'id_genre', //id_fk para generos
+            'id_genre', //id_fk para géneros
             'id_product', //parent key
             'id_genre', //parent key
         );

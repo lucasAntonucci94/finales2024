@@ -76,7 +76,7 @@ class News extends Model
             Genre::class,
             'news_has_genres', //tabla pivot de mi relacion
             'id_new', //id_fk para noticias
-            'id_genre', //id_fk para generos
+            'id_genre', //id_fk para géneros
             'id_new', //parent key
             'id_genre', //parent key
         );

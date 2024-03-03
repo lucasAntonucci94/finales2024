@@ -30,7 +30,7 @@
             @forelse ($product->genres  as $genre)
             <span class="badge bg-secondary text-white">{{$genre->name}}</span>
             @empty
-            Sin genero
+            Sin género
             @endforelse
             {{-- {{$product->country->name}} --}}
         </dt>

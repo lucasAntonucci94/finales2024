@@ -14,7 +14,7 @@
                 <a class="btn btn-dark my-3 text-white" href="<?= url('admin/dashboard');?>">Volver al panel</a>
             </div>
         <div class="col-md-12 d-flex justify-content-center">
-            <p class="text-center small text-info"> Seleccione alguna de las siguientes estadísticas para ver el grafico asociado.</p>
+            <p class="text-center small text-info"> Seleccione alguna de las siguientes estadísticas para ver el gráfico asociado.</p>
         </div>
         <div class="col-md-8 mx-auto">
             <form action="{{ route('admin.statistics.get') }}" method="post" class="d-flex align-items-center" id="statisticsForm">
