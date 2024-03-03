@@ -49,6 +49,7 @@
     </div>
 </section>
 <script>
+    const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const showPasswordBtn = document.getElementById("show-password-btn");
     const eyeIcon = document.getElementById("eye-icon");
@@ -64,6 +65,31 @@
             eyeIcon.classList.add("fa-eye");
         }
     };
+
     showPasswordBtn.addEventListener("click", togglePasswordVisibility);
+
+    emailInput.addEventListener("input", () => {
+        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const value = emailInput.value;
+
+        if (!emailRegex.test(value)) {
+            emailInput.classList.add("is-invalid");
+        } else {
+            emailInput.classList.remove("is-invalid");
+            emailInput.classList.add("is-valid");
+        }   
+    });
+
+    passwordInput.addEventListener("input", () => {
+        const value = passwordInput.value;
+
+        if (value.length < 6) {
+            passwordInput.classList.add("is-invalid");
+        } else {
+            passwordInput.classList.remove("is-invalid");
+            passwordInput.classList.add("is-valid");
+        }   
+    });
+
 </script>
 @endsection

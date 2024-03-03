@@ -6,7 +6,7 @@
 <div class="container-fluid container-padding">
     <div class="row" style="margin: 0px">
         <div class="col-12 p-5 bg-pedidos text-center text-white d-flex justify-content-center align-items-center" >
-            <h2 class="w-100 text-center my-5">ABM DE PEDIDOS</h2>
+            <h1 class="w-100 text-center my-5">ABM DE PEDIDOS</h1>
         </div>
         <div class="col-12">
             @if(Session::has('message.success'))

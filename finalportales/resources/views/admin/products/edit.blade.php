@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-12">
                         <label for="detail"  class="form-label my-2">Nombre</label>
-                        <input type="text" name="detail" id="detail" class="form-label  w-100  @error('detail') is-invalid @enderror"
+                        <input type="text" name="detail" id="detail" placeholder="Ingrese un nombre" class="form-control  w-100  @error('detail') is-invalid @enderror"
                         @error('detail') aria-describedby="error-detail" @enderror
                         value="{{old('detail', $product->detail)}}"
                         >
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-12">
                         <label for="price"  class="form-label my-2">Precio</label>
-                        <input type="number" name="price" id="price" class="form-label  w-100 @error('price') is-invalid @enderror"
+                        <input type="number" name="price" id="price" placeholder="Ingrese un precio" class="form-control  w-100 @error('price') is-invalid @enderror"
                         @error('price') aria-describedby="error-price" @enderror
                         value="{{old('price', $product->price)}}"
                         >
@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-12">
                         <label for="date"  class="form-label my-2">Fecha de producción</label>
-                        <input  type="date" name="date" id="date" class="form-label  w-100 @error('date') is-invalid @enderror"
+                        <input  type="date" name="date" id="date" class="form-control w-100 @error('date') is-invalid @enderror"
                         @error('error-date') aria-describedby="error-date" @enderror
                         value="{{old('date', $product->date->toDateString())}}"
                         >
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-12">
                         <label for="description" class="form-label  my-2">Descripción</label>
-                        <textarea type="text" name="description" id="description"  style="min-height:250px;" class="form-label w-100 @error('description') is-invalid @enderror"
+                        <textarea type="text" name="description" id="description"  style="min-height:250px;" class="form-control w-100 @error('description') is-invalid @enderror"
                         @error('description') aria-describedby="error-description" @enderror
                         >  {{old('description', $product->description)}}</textarea>
                         @error('description')
@@ -145,7 +145,7 @@
                     </div>
                     <div class="col-6">
                         <label for="image"  class="form-label w-100 my-2">Seleccione una nueva imagen:</label>
-                        <input type="file" name="image" id="image" class="form-label small">
+                        <input type="file" name="image" id="image" class="form-control small">
                     </div>
                 </div>
             </div>
@@ -156,4 +156,75 @@
         </form>
     </div>
 </div>
+<script>
+        const descriptionInput = document.getElementById("description");
+        descriptionInput.addEventListener("input", () => {
+            const value = descriptionInput.value;
+
+            if (value.length < 10) {
+                descriptionInput.classList.add("is-invalid");
+            } else {
+                descriptionInput.classList.remove("is-invalid");
+                descriptionInput.classList.add("is-valid");
+            }
+        });
+
+        const detailInput = document.getElementById("detail");
+        detailInput.addEventListener("input", () => {
+            const value = detailInput.value;
+
+            if (value.length < 6) {
+                detailInput.classList.add("is-invalid");
+            } else {
+                detailInput.classList.remove("is-invalid");
+                detailInput.classList.add("is-valid");
+            }
+        });
+        
+        const priceInput = document.getElementById("price");
+        priceInput.addEventListener("input", () => {
+            const value = priceInput.value;
+
+            if (parseInt(value) < 0) {
+                priceInput.classList.add("is-invalid");
+            } else {
+                priceInput.classList.remove("is-invalid");
+                priceInput.classList.add("is-valid");
+            }
+        });
+
+        const dateInput = document.getElementById("date");
+        dateInput.addEventListener("input", () => {
+            const value = dateInput.value;
+            const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+            if (!dateRegex.test(value)) {
+                dateInput.classList.add("is-invalid");
+            } else {
+                dateInput.classList.remove("is-invalid");
+                dateInput.classList.add("is-valid");
+            }
+        });
+
+        const countrySelect = document.getElementById("id_country");
+        const providerSelect = document.getElementById("id_provider");
+
+        // Add event listeners for both select boxes
+        countrySelect.addEventListener("change", handleSelectChange);
+        providerSelect.addEventListener("change", handleSelectChange);
+
+        function handleSelectChange(event) {
+        const selectElement = event.target; // Get the select element that triggered the event
+
+        // Check if a valid option is selected (value is not empty)
+        if (selectElement.value !== "") {
+            selectElement.classList.add("is-valid"); // Add "is-valid" class to the selected option
+            selectElement.classList.remove("is-invalid"); // Remove any previous "is-invalid" class
+        } else {
+            selectElement.classList.remove("is-valid"); // Remove "is-valid" class if no option is selected
+            selectElement.classList.add("is-invalid"); // Add "is-invalid" class to indicate error
+        }
+        }
+
+</script>
 @endsection

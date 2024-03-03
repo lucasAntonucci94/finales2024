@@ -5,7 +5,7 @@
 @section('main')
 <div class="container container-padding">
 
-<h2 class="w-100 text-center my-5">{{$product->detail}} </h2>
+<h1 class="w-100 text-center my-5">{{$product->detail}} </h1>
 <div class="text-center">
 
     @if ($product->image != '' && file_exists('images/'.$product->image))

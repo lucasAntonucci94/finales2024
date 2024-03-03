@@ -42,25 +42,25 @@
                     </div>
                     <div class="col-12 d-none">
                         <label for="id"  class="form-label">ID</label>
-                        <input  type="text" name="id" id="id" class="form-label w-100"
+                        <input  type="text" name="id" id="id" class="form-control w-100"
                         value="{{old('id', $order->id)}}"
                         disabled
                     >
                     </div>
                     <div class="col-12">
                         <label for="id_user1"  class="form-label mb-2">Usuario</label>
-                        <input type="text" name="id_user1" id="id_user1" class="form-label w-100"
+                        <input type="text" name="id_user1" id="id_user1" class="form-control w-100"
                         value="{{old('id_user', $order->user->id)}}"
                         disabled
                         >
                     </div>
                     <div class="col-12  sr-only">
                         <label for="id_user"  class="form-label my-2">Usuario</label>
-                        <input type="text" name="id_user" id="id_user" class="form-label w-100" value="{{old('id_user', $order->user->id)}}">
+                        <input type="text" name="id_user" id="id_user" class="form-control w-100" value="{{old('id_user', $order->user->id)}}">
                     </div>
                     <div class="col-12">
                         <label for="created_at"  class="form-label my-2">Fecha de creación</label>
-                        <input  type="date" name="created_at" id="created_at"  class="form-label w-100 @error('created_at') is-invalid @enderror"
+                        <input  type="date" name="created_at" id="created_at"  class="form-control w-100 @error('created_at') is-invalid @enderror"
                         @error('error-created_at') aria-describedby="error-created_at" @enderror
                         value="{{old('created_at', $order->created_at->toDateString())}}"
                         disabled
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-12">
                         <label for="status"  class="form-label my-2">Estado</label>
-                        <input type="text" name="status" id="status"  class="form-label w-100 @error('status') is-invalid @enderror"
+                        <input type="text" name="status" id="status" placeholder="ingrese un estado" class="form-control w-100 @error('status') is-invalid @enderror"
                         @error('status') aria-describedby="error-status" @enderror
                         value="{{old('status', $order->status)}}"
                         >
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-12">
                         <label for="enabled"  class="form-label my-2">Activo</label>
-                        <input type="text" name="enabled" id="enabled"  class="form-label w-100 @error('enabled') is-invalid @enderror"
+                        <input type="text" name="enabled" id="enabled"  class="form-control w-100 @error('enabled') is-invalid @enderror"
                         @error('enabled') aria-describedby="error-enabled" @enderror
                         value="{{old('enabled', $order->enabled)}}"
                         disabled
@@ -105,4 +105,18 @@
         </form>
     </div>
 </div>
+<script>
+    const statusInput = document.getElementById("status");
+    
+    statusInput.addEventListener("input", () => {
+        const value = statusInput.value;
+
+        if (value.length < 4) {
+            statusInput.classList.add("is-invalid");
+        } else {
+            statusInput.classList.remove("is-invalid");
+            statusInput.classList.add("is-valid");
+        }   
+    });
+</script>
 @endsection

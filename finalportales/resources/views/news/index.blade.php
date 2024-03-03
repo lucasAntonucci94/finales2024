@@ -6,7 +6,7 @@
 
 <div class="container-fluid deleteRowMargin container-padding">
     <div class="bg-secondary d-flex justify-content-around align-items-center">
-        <h2 class="w-100 text-center text-white py-5">Novedades</h2>
+        <h1 class="w-100 text-center text-white py-5">Novedades</h1>
     </div>
     @if($news->isNotEmpty())
     <div class="row d-flex justify-content-around align-items-center deleteRowMargin">

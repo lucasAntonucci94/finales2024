@@ -22,7 +22,7 @@
             </button>
         </div>
     @endif
-    <h2 class="w-100 text-center my-5">Crea una noticia</h2>
+    <h1 class="w-100 text-center my-5">Crea una noticia</h1>
     @if($errors->any())
         <div class="alert alert-danger">Hay errores en los valores del formulario. Por favor, revise los campos y corrija el error.</div>
     @endif
@@ -33,7 +33,7 @@
                 <div class="row d-flex">
                     <div class="col-12">
                         <label for="title"  class="form-label w-100 my-3">Nombre</label>
-                        <input type="text" name="title" id="title" class="form-label w-100 @error('title') is-invalid @enderror"
+                        <input type="text" name="title" id="title" class="form-control w-100 @error('title') is-invalid @enderror"
                         @error('title') aria-describedby="error-title" @enderror
                         value="{{old('title')}}"
                         >
@@ -44,7 +44,7 @@
 
                     <div class="col-12">
                         <label for="detail"  class="form-label w-100 my-3">Detalle</label>
-                        <input type="text" name="detail" id="detail" class="form-label w-100 @error('detail') is-invalid @enderror"
+                        <input type="text" name="detail" id="detail" class="form-control w-100 @error('detail') is-invalid @enderror"
                         @error('detail') aria-describedby="error-detail" @enderror
                         value="{{old('detail')}}"
                         >
@@ -55,7 +55,7 @@
 
                     <div class="col-12">
                         <label for="date"  class="form-label w-100 my-3">Fecha Creación</label>
-                        <input  type="date" name="date" id="date" class="form-label w-100 @error('date') is-invalid @enderror"
+                        <input  type="date" name="date" id="date" class="form-control w-100 @error('date') is-invalid @enderror"
                         @error('error-date') aria-describedby="error-date" @enderror
                         value="{{old('date')}}"
                         >
@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-12">
                         <label for="description" class="form-label w-100  my-3">Descripción</label>
-                        <textarea type="text" name="description" id="description"  style="height:250px;" class="form-label w-100 @error('description') is-invalid @enderror"
+                        <textarea type="text" name="description" id="description"  style="height:250px;" class="form-control w-100 @error('description') is-invalid @enderror"
                         @error('description') aria-describedby="error-description" @enderror
                         value="">  {{old('description')}}</textarea>
                         @error('description')
@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-12">
                     <label for="image"  class="form-label w-100 my-3">Portada</label>
-                    <input type="file" name="image" id="image" class="form-label">
+                    <input type="file" name="image" id="image" class="form-control">
                 </div>
                 <div id="preview" class="col-12 d-none">
                     <p>Previsualización de la imagen</p>
@@ -113,7 +113,7 @@
 
                 <div class="col-12 d-none">
                     <label for="id_user"  class="form-label w-100 my-3">id_user</label>
-                    <input  type="text" name="id_user" id="id_user"  style="width:650px" class="form-label"
+                    <input  type="text" name="id_user" id="id_user"  style="width:650px" class="form-control"
                     value="{{auth()->user()->id}}"
                     >
                 </div>

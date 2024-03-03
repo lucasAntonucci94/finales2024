@@ -124,5 +124,41 @@
         });
         freader.readAsDataURL(this.files[0]);
     });
+
+    const emailInput = document.getElementById("email");
+    const nameInput = document.getElementById("name");
+    const passwordInput = document.getElementById("password");
+   
+    passwordInput.addEventListener("input", () => {
+        const value = passwordInput.value;
+
+        if (value.length < 6) {
+            passwordInput.classList.add("is-invalid");
+        } else {
+            passwordInput.classList.remove("is-invalid");
+            passwordInput.classList.add("is-valid");
+        }   
+    });
+    emailInput.addEventListener("input", () => {
+        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const value = emailInput.value;
+
+        if (!emailRegex.test(value)) {
+            emailInput.classList.add("is-invalid");
+        } else {
+            emailInput.classList.remove("is-invalid");
+            emailInput.classList.add("is-valid");
+        }   
+    });
+    nameInput.addEventListener("input", () => {
+        const value = nameInput.value;
+
+        if (value.length < 4) {
+            nameInput.classList.add("is-invalid");
+        } else {
+            nameInput.classList.remove("is-invalid");
+            nameInput.classList.add("is-valid");
+        }   
+    });
 </script>
 @endsection

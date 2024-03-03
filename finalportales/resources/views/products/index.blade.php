@@ -26,7 +26,7 @@
             </div>
         @endif
         <div class="d-flex justify-content-around align-items-center w-100">
-            <h2 class="w-100 sr-only">Buscador</h2>
+            <h1 class="w-100 sr-only">Buscador</h2>
             <form action="{{ route('products.index') }}" method="get" class="d-flex py-3">
                 <label class="form-label sr-only" for="q">Titulo</label>
                 <input id="q" class="form-control" type="search" name="q" placeholder="busqueda por titulo"

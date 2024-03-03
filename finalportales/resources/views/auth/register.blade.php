@@ -89,9 +89,6 @@
                                             <i class="fa fa-solid fa-eye" id="eye-icon-verify"></i>
                                         </button>
                                     </div>
-                                @error('passwordVerify')
-                                    <div id="error-passwordVerify" class="text-danger text-small"><p>{{ $message }}</p></div>
-                                @enderror
                             </div>
                         </div>
                     </div>
@@ -105,6 +102,8 @@
 </section>
 
 <script>
+    const emailInput = document.getElementById("email");
+    const nameInput = document.getElementById("name");
     const passwordInput = document.getElementById("password");
     const showPasswordBtn = document.getElementById("show-password-btn");
     const passwordVerifyInput = document.getElementById("passwordVerify");
@@ -136,25 +135,48 @@
     };
     showPasswordBtn.addEventListener("click", togglePasswordVisibility);
     showPasswordVerifyBtn.addEventListener("click", togglePasswordVerifyVisibility);
-    passwordVerifyInput.addEventListener("input", () => {
-    const password = passwordInput.value;
-    const passwordVerify = passwordVerifyInput.value;
 
-    // Check for password mismatch
-    if (passwordVerify !== password) {
-        passwordVerifyInput.classList.add("is-invalid"); // Add error class
-        const errorElement = document.getElementById("error-passwordVerify");
-        if (errorElement) {
-            errorElement.textContent = "Las contraseñas no coinciden."; // Display custom error message
-        }
-    } else {
-        passwordVerifyInput.classList.remove("is-invalid"); // Remove error class if passwords match
-        passwordVerifyInput.classList.add("is-valid"); // Remove error class if passwords match
-        // Clear any existing error message
-        if (errorElement) {
-            errorElement.textContent = "";
-        }
-    }
+    passwordInput.addEventListener("input", () => {
+        const value = passwordInput.value;
+
+        if (value.length < 6) {
+            passwordInput.classList.add("is-invalid");
+        } else {
+            passwordInput.classList.remove("is-invalid");
+            passwordInput.classList.add("is-valid");
+        }   
+    });
+    passwordVerifyInput.addEventListener("input", () => {
+        const password = passwordInput.value;
+        const passwordVerify = passwordVerifyInput.value;
+
+        if (passwordVerify !== password) {
+            passwordVerifyInput.classList.add("is-invalid");
+        } else {
+            passwordVerifyInput.classList.remove("is-invalid");
+            passwordVerifyInput.classList.add("is-valid");
+        }   
+    });
+    emailInput.addEventListener("input", () => {
+        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const value = emailInput.value;
+
+        if (!emailRegex.test(value)) {
+            emailInput.classList.add("is-invalid");
+        } else {
+            emailInput.classList.remove("is-invalid");
+            emailInput.classList.add("is-valid");
+        }   
+    });
+    nameInput.addEventListener("input", () => {
+        const value = nameInput.value;
+
+        if (value.length < 4) {
+            nameInput.classList.add("is-invalid");
+        } else {
+            nameInput.classList.remove("is-invalid");
+            nameInput.classList.add("is-valid");
+        }   
     });
 </script>
 @endsection

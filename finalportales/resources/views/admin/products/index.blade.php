@@ -7,7 +7,7 @@
 
 
     <div class="col-12 p-5 bg-abmproducts text-center text-white  d-flex justify-content-center align-items-center" >
-        <h2 class="w-100 text-center my-5">ABM DE PRODUCTOS</h2>
+        <h1 class="w-100 text-center my-5">ABM DE PRODUCTOS</h1>
     </div>
     @if(Session::has('message.success'))
     <div class="alert alert-success alert-dismissible fade show text-center">
