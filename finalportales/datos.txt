@@ -8,6 +8,7 @@ Carácter: Proyecto Final
 Alumnos: Antonucci Lucas, Yamamoto Ana Paula
 
 Otros datos de importancia:
+Repositorio: https://github.com/lucasAntonucci94/finales2024.git
 
 Usuarios:
 ---------
