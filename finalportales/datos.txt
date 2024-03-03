@@ -9,6 +9,20 @@ Alumnos: Antonucci Lucas, Yamamoto Ana Paula
 
 Otros datos de importancia:
 
+Usuarios:
+---------
+usuario admin: lucas.e.antonucci@gmail.com  Ab123456
+usuario normal: sanches.juan@gmail.com  Ab123456
+
+usuario para pruebas de MERCADOPAGO: nayla.pecorelli@gmail.com  Ab123456  
+(puede ser cualquier usuario excepto lucas.e.antonucci@gmail.com,
+ ya que es mi mail de mi usuario personal, por lo que te va a rebotar el sandbox.
+ Ademas es el mail con el que registre la app en mercadopago y no es valido para hacer las pruebas, notificandonos que no puedo pagarme a mi mismo.)
+
+----------------------------------------------------------
+
+Pruebas Unitarias:
+-----------------
 Para ejecutar las pruebas unitarias yo implemente una tabla espejo de mysql, mas que espejo una nueva tabla, a la cual se le debe correr el migration y los seeders, final_portales_la_test.
 Como lo hago yo, en env. modifico el valor de la configuracion de la tabla principal DB_DATABASE=final_portales_la
 al siguiente DB_DATABASE=final_portales_la_test
@@ -45,12 +59,3 @@ verificar que pase los siguientes test:
   ✓ delete with valid id and returns success
 
   Tests:  21 passed
-
-----------------------------------------------------------
-usuario admin: lucas.e.antonucci@gmail.com  Ab123456
-usuario normal: sanches.juan@gmail.com  Ab123456
-
-usuario para pruebas de MERCADOPAGO: nayla.pecorelli@gmail.com  Ab123456  
-(puede ser cualquier usuario excepto lucas.e.antonucci@gmail.com,
- ya que es mi mail de mi usuario personal, por lo que te va a rebotar el sandbox.
- Ademas es el mail con el que registre la app en mercadopago y no es valido para hacer las pruebas, notificandonos que no puedo pagarme a mi mismo.)
