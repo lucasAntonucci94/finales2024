@@ -185,8 +185,8 @@
         const priceInput = document.getElementById("price");
         priceInput.addEventListener("input", () => {
             const value = priceInput.value;
-
-            if (parseInt(value) < 0) {
+            var intVal = value === "" ? 0 : parseInt(value)
+            if (intVal === 0) {
                 priceInput.classList.add("is-invalid");
             } else {
                 priceInput.classList.remove("is-invalid");
@@ -214,15 +214,15 @@
         providerSelect.addEventListener("change", handleSelectChange);
 
         function handleSelectChange(event) {
-        const selectElement = event.target;
+            const selectElement = event.target;
 
-        if (selectElement.value !== "") {
-            selectElement.classList.add("is-valid");
-            selectElement.classList.remove("is-invalid");
-        } else {
-            selectElement.classList.remove("is-valid");
-            selectElement.classList.add("is-invalid");
-        }
+            if (selectElement.value !== "") {
+                selectElement.classList.add("is-valid");
+                selectElement.classList.remove("is-invalid");
+            } else {
+                selectElement.classList.remove("is-valid");
+                selectElement.classList.add("is-invalid");
+            }
         }
 
     </script>

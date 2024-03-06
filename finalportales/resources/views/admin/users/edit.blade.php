@@ -80,7 +80,7 @@
                 <div class="col-12">
                     <div class="form-group w-100 my-2">
                         <strong class="my-2">Roles:</strong>
-                        <select name="id_role" class="form-control my-2 w-100 custom-select">
+                        <select name="id_role" id="id_role" class="form-control my-2 w-100 custom-select">
                             <option value="">Seleccione un Rol</option>
                             @foreach($roles as $role)
                             <option value="{{ $role->id_role }}" @if(old('id_role') == $role->id_role || $user->id_role == $role->id_role ) selected @endif>{{ $role->name }}</option>
@@ -142,7 +142,8 @@
     const emailInput = document.getElementById("email");
     const nameInput = document.getElementById("name");
     const passwordInput = document.getElementById("password");
-   
+    const rolesSelect = document.getElementById("id_role");
+    
     passwordInput.addEventListener("input", () => {
         const value = passwordInput.value;
 
@@ -174,5 +175,18 @@
             nameInput.classList.add("is-valid");
         }   
     });
+    rolesSelect.addEventListener("change", handleSelectChange);
+
+    function handleSelectChange(event) {
+        const selectElement = event.target;
+
+        if (selectElement.value !== "") {
+            selectElement.classList.add("is-valid");
+            selectElement.classList.remove("is-invalid");
+        } else {
+            selectElement.classList.remove("is-valid");
+            selectElement.classList.add("is-invalid");
+        }
+    }
 </script>
 @endsection
